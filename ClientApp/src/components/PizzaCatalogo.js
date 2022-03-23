@@ -161,6 +161,24 @@ export class PizzaCatalogo extends Component{
         
     }
 
+    eliminarPizza = (id) => {
+        const options = {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: {}
+        };
+
+        fetch('pizza/'+id, options)
+            .then(
+                (response) => { 
+                    console.log(response.status);
+                    this.componentDidMount(); 
+                }
+            );
+    }
+
     editar  = (item) => {
         console.log(item);
         fetch('pizza/'+item.id)
@@ -232,7 +250,7 @@ export class PizzaCatalogo extends Component{
                                         <td><Button color="primary" onClick={() => this.editar(pizza) } >
                                                 Edit
                                             </Button> {' '}
-                                            <Button color="primary" >
+                                            <Button onClick={() => this.eliminarPizza(pizza.id)} color="primary" >
                                                 X
                                             </Button>
                                         </td>
